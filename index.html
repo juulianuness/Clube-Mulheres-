@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clube Mulheres Saudáveis — Autoconhecimento & Autocuidado</title>
+  <meta name="description" content="Clube Mulheres Saudáveis: comunidade, encontros online e presenciais, conteúdos exclusivos, workshops e suporte para sua jornada de autocuidado." />
+
+  <style>
+    :root{
+      --bg:#fff8f9;
+      --accent:#c2416c;
+      --accent-hover:#a33359;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --radius:18px;
+      --max-w:1100px;
+      --shadow: 0 8px 30px rgba(16,24,40,0.08);
+      --shadow-hover: 0 12px 40px rgba(16,24,40,0.12);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#fff 0%, #fff8f9 100%);color:#111827;overflow-x:hidden}
+    .container{max-width:var(--max-w);margin:0 auto;padding:28px}
+
+    /* ANIMAÇÕES */
+    @keyframes fadeInUp {
+      from {opacity:0;transform:translateY(30px)}
+      to {opacity:1;transform:translateY(0)}
+    }
+    @keyframes float {
+      0%, 100% {transform:translateY(0)}
+      50% {transform:translateY(-10px)}
+    }
+    @keyframes pulse {
+      0%, 100% {opacity:1}
+      50% {opacity:0.7}
+    }
+
+    .fade-in {animation:fadeInUp 0.6s ease-out forwards;opacity:0}
+    .fade-in:nth-child(1){animation-delay:0.1s}
+    .fade-in:nth-child(2){animation-delay:0.2s}
+    .fade-in:nth-child(3){animation-delay:0.3s}
+    .fade-in:nth-child(4){animation-delay:0.4s}
+    .fade-in:nth-child(5){animation-delay:0.5s}
+    .fade-in:nth-child(6){animation-delay:0.6s}
+
+    /* HERO */
+    .hero{display:flex;flex-direction:column;gap:20px;align-items:center;padding:36px 0}
+    .hero-inner{display:flex;flex-direction:column;gap:24px;width:100%;align-items:center}
+    .hero-title{font-size:34px;line-height:1.03;font-weight:800;animation:fadeInUp 0.8s ease-out}
+    .hero-sub{color:var(--muted);max-width:700px;text-align:center;animation:fadeInUp 0.8s ease-out 0.2s;opacity:0;animation-fill-mode:forwards}
+    .hero-cta{display:flex;gap:12px;animation:fadeInUp 0.8s ease-out 0.4s;opacity:0;animation-fill-mode:forwards}
+    
+    .btn{display:inline-block;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:600;transition:all 0.3s ease;cursor:pointer;border:none;font-size:15px}
+    .btn-primary{background:var(--accent);color:white;box-shadow:var(--shadow)}
+    .btn-primary:hover{background:var(--accent-hover);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+    .btn-ghost{border:1px solid rgba(196,65,108,0.14);color:var(--accent);background:transparent}
+    .btn-ghost:hover{background:rgba(196,65,108,0.05);border-color:var(--accent)}
+    
+    .hero-media{width:100%;display:block;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);animation:fadeInUp 0.8s ease-out 0.3s;opacity:0;animation-fill-mode:forwards;transition:transform 0.3s ease}
+    .hero-media:hover{transform:scale(1.02)}
+    .hero-media img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .hero-features{animation:fadeInUp 0.8s ease-out 0.5s;opacity:0;animation-fill-mode:forwards}
+
+    /* BADGES */
+    .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(194,65,108,0.08);color:var(--accent);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:16px}
+
+    /* GRID FEATURES */
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
+    .card{background:var(--card);border-radius:var(--radius);padding:16px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow);transition:all 0.3s ease;cursor:pointer;border:2px solid transparent}
+    .card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px);border-color:rgba(194,65,108,0.1)}
+    .card img{width:128px;height:88px;object-fit:cover;border-radius:12px;flex-shrink:0;transition:transform 0.3s ease}
+    .card:hover img{transform:scale(1.05)}
+    .card h4{margin:0;font-size:18px;color:#111827}
+    .card p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.5}
+
+    /* STATS */
+    .stats{display:flex;gap:32px;justify-content:center;margin:32px 0;flex-wrap:wrap}
+    .stat{text-align:center}
+    .stat-number{font-size:38px;font-weight:800;color:var(--accent);line-height:1}
+    .stat-label{color:var(--muted);font-size:14px;margin-top:4px}
+
+    /* PRICING */
+    .pricing{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+    .price-card{flex:1;min-width:220px;background:linear-gradient(180deg,#fff,#fffaf6);border-radius:16px;padding:22px;box-shadow:var(--shadow);transition:all 0.3s ease;border:2px solid transparent;position:relative}
+    .price-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px)}
+    .price-card.featured{border:2px solid var(--accent);transform:scale(1.02)}
+    .price-card.featured:hover{transform:scale(1.04) translateY(-4px)}
+    .price-card.featured::before{content:'RECOMENDADO';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:white;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.5px}
+    .price-card h5{margin:0;font-size:16px;color:var(--muted)}
+    .price-value{font-size:26px;font-weight:700;margin-top:8px;color:#111827}
+    .price-value small{font-size:16px;color:var(--muted);font-weight:400}
+    .price-features{margin-top:14px;color:var(--muted);font-size:14px;line-height:1.6}
+    .price-btn{margin-top:16px}
+
+    /* FAQ */
+    .faq-item{background:var(--card);border-radius:14px;padding:20px;margin-bottom:12px;box-shadow:var(--shadow);cursor:pointer;transition:all 0.3s ease}
+    .faq-item:hover{box-shadow:var(--shadow-hover)}
+    .faq-question{font-weight:600;display:flex;justify-content:space-between;align-items:center;user-select:none}
+    .faq-answer{margin-top:12px;color:var(--muted);line-height:1.6;max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+    .faq-item.active .faq-answer{max-height:200px}
+    .faq-toggle{transition:transform 0.3s ease;color:var(--accent);font-weight:bold}
+    .faq-item.active .faq-toggle{transform:rotate(45deg)}
+
+    /* TESTIMONIAL */
+    .testimonial{background:linear-gradient(135deg, #fff 0%, #fff8f9 100%);border-radius:16px;padding:24px;box-shadow:var(--shadow);border-left:4px solid var(--accent);margin-top:24px}
+    .testimonial-text{font-style:italic;color:#111827;line-height:1.7;font-size:16px}
+    .testimonial-author{margin-top:12px;font-weight:600;color:var(--accent);font-size:14px}
+
+    /* CTA SECTION */
+    .cta-section{background:linear-gradient(135deg, var(--accent) 0%, #a33359 100%);color:white;border-radius:20px;padding:40px;text-align:center;margin:40px 0;box-shadow:var(--shadow)}
+    .cta-section h3{margin:0 0 12px 0;font-size:28px}
+    .cta-section p{margin:0 0 24px 0;opacity:0.95}
+    .cta-section .btn-primary{background:white;color:var(--accent)}
+    .cta-section .btn-primary:hover{background:#f9f9f9;transform:translateY(-2px) scale(1.05)}
+
+    /* FOOTER */
+    footer{margin-top:48px;padding:32px 0;color:var(--muted);font-size:14px;border-top:1px solid rgba(0,0,0,0.04)}
+    footer a{color:var(--muted);text-decoration:none;transition:color 0.2s ease}
+    footer a:hover{color:var(--accent)}
+
+    /* FLOATING WHATSAPP */
+    .whatsapp-float{position:fixed;bottom:24px;right:24px;background:#25D366;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);cursor:pointer;transition:all 0.3s ease;z-index:1000;animation:float 3s ease-in-out infinite}
+    .whatsapp-float:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,0.6)}
+    .whatsapp-float svg{width:32px;height:32px}
+
+    /* RESPONSIVE */
+    @media (min-width:900px){
+      .hero-inner{flex-direction:row;align-items:center}
+      .hero-title{text-align:left;font-size:42px}
+      .hero-sub{text-align:left}
+      .hero-media{width:48%}
+      .hero-copy{width:52%;text-align:left}
+      .grid{grid-template-columns:repeat(3,1fr)}
+      .container{padding:36px}
+    }
+    @media (max-width:899px){
+      .grid{grid-template-columns:1fr}
+      .hero-title{font-size:28px}
+      .card{flex-direction:column;text-align:center}
+      .card img{width:100%;height:180px}
+      .stats{gap:24px}
+      .stat-number{font-size:32px}
+      .whatsapp-float{bottom:16px;right:16px;width:56px;height:56px}
+    }
+  </style>
+</head>
+<body >
+  <header class="container" style="background:linear-gradient(90deg,#f8f4f4 0%, #fce2e8 100%);padding-bottom:6px; border-radius: 30px;">
+    <div class="container hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+
+            
+    
+          <h1 class="hero-title">
+
+            
+
+            
+            Clube <span style="color:var(--accent)">Mulheres Saudáveis</span></span>
+            </h1>
+
+            <p class="hero-sub">
+            Autoconhecimento, Autocuidado e Comunidade <br> Um espaço para mulheres que querem se priorizar com leveza, sem culpa e com apoio real. 
+            
+            <br> <br> 
+            <img src="./logo-psi.svg" height="80px"  alt="logo psicóloga jaqueline vieira" /> <br> <br>
+            </p>
+
+            
+
+            <div class="hero-cta">
+            <a href="#assinar" class="btn btn-primary">Quero Entrar</a>
+            <a href="#conteudo" class="btn btn-ghost">Ver Benefícios</a>
+            </div>
+
+          
+        </div>
+
+        <div class="hero-media" aria-hidden="true">
+          <img src="https://plus.unsplash.com/premium_photo-1748026235238-183cd2f2db85?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mulheres em momento de autocuidado e bem-estar" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- STATS -->
+    <!-- <div class="stats">
+      <div class="stat">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Membros ativas</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">24</div>
+        <div class="stat-label">Encontros por ano</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Satisfação</div>
+      </div>
+    </div> -->
+
+    <!-- BENEFÍCIOS -->
+
+     <!-- TESTIMONIAL -->
+    <div class="testimonial">
+      <div class="testimonial-text">"Um clube para você mulher, que busca ferramentas reais para te auxiliar no dia a dia e decidiu investir em si com prazer. <br>
+        junte-se a nós nessa jornada transformadora!"</div>
+      <div class="testimonial-author">— Psicóloga Jaqueline Vieira</div>
+    </div>
+
+
+    <section id="conteudo">
+      <h2 style="margin:32px 0 8px;font-size:28px;text-align:center;">O que você encontra no clube</h2>
+      <p style="text-align:center;color:var(--muted);margin-bottom:8px;">Tudo pensado para sua jornada de autocuidado</p>
+      
+      <div class="grid">
+        <article class="card fade-in">
+          <img src="https://plus.unsplash.com/premium_photo-1684761949804-fd8eb9a5b6cc?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Grupo WhatsApp de mulheres" />
+          <div>
+            <h4>Grupo Exclusivo no WhatsApp</h4>
+            <p>Espaço acolhedor para trocas diárias, motivação e suporte contínuo entre as participantes.</p>
+          </div>
+        </article>
+
+        <article class="card fade-in">
+          <img src="https://plus.unsplash.com/premium_photo-1661310140995-5a1c8e6a5cad?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mulher lendo conteúdos de desenvolvimento pessoal" />
+          <div>
+            <h4>Conteúdos Exclusivos</h4>
+            <p>Guias, exercícios de autoconhecimento, PDFs para imprimir, vídeos e mini-palestras práticas.</p>
+          </div>
+        </article>
+
+        <article class="card fade-in">
+          <img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?q=80&w=800&auto=format&fit=crop" alt="Encontro online via videochamada" />
+          <div>
+            <h4>Encontros Quinzenais Online</h4>
+            <p>Bate papos ao vivo que ficarão gravados e disponíveis na área de membros.</p>
+          </div>
+        </article>
+
+        <article class="card fade-in">
+          <img src="https://images.unsplash.com/photo-1758520388316-416b732104f1?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mulheres tomando café juntas" />
+          <div>
+            <h4>Café com Autocuidado (Presencial)</h4>
+            <p>Encontro mensal para rodas de conversa, exercícios práticos e um momento de pausa.</p>
+          </div>
+        </article>
+
+        <article class="card fade-in">
+          <img src="https://plus.unsplash.com/premium_photo-1680807868966-90a84c68c944?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Especialista palestrando para grupo de mulheres" />
+          <div>
+            <h4>Encontro Mensal com Especialista</h4>
+            <p>Convidadas que trazem temas complementares: nutrição, saúde, exercícios e mais.</p>
+          </div>
+        </article>
+
+        <article class="card fade-in">
+          <img src="https://plus.unsplash.com/premium_photo-1664302352596-39705ae01a8f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Workshop e oficina temática" />
+          <div>
+            <h4>Workshops & Eventos</h4>
+            <p>Workshops onlines e Eventos presenciais com descontos</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    
+
+    <!-- PLANOS -->
+    <section id="assinar" style="margin-top:48px;">
+      <h2 style="font-size:28px;margin-bottom:8px;text-align:center;">Planos de Assinatura</h2>
+      <p style="color:var(--muted);margin-top:0;text-align:center;">Assinatura semestral ou anual — escolha a melhor forma de viver sua jornada</p>
+
+      <div class="pricing">
+        <div class="price-card">
+          <h5>Semestral</h5>
+          <div class="price-value">R$ 29,99 <small>/ 10x</small></div>
+          <div class="price-features">
+            ✓ Acesso completo por 6 meses<br>
+            ✓ Todos os encontros e conteúdos<br>
+            ✓ Grupo exclusivo WhatsApp<br>
+            
+          </div>
+          <div class="price-btn"><a class="btn btn-primary" href="https://wa.me/5521972262009?text=Olá!%20Gostaria%20de%20assinar%20o%20pacote%20semestral%20do%20Clube%20Mulheres%20Saudáveis" target="_blank">Assinar Semestral</a></div>
+        </div>
+
+        <div class="price-card featured">
+          <h5>Anual</h5>
+          <div class="price-value">R$ 39,99 <small>/ 10x</small></div>
+          <div class="price-features">
+            ✓ Acesso por 12 meses<br>
+            ✓ Prioridade em eventos presenciais<br>
+            ✓ Grupo exclusivo WhatsApp<br>
+        
+          </div>
+          <div class="price-btn"><a class="btn btn-primary" href="https://wa.me/5521972262009?text=Olá!%20Gostaria%20de%20assinar%20o%20pacote%20anual%20do%20Clube%20Mulheres%20Saudáveis" target="_blank">Assinar Anual</a> </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-top:48px;">
+      <h2 style="font-size:28px;margin-bottom:20px;text-align:center;">Perguntas Frequentes</h2>
+      
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>Como funciona a assinatura?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          A assinatura é recorrente e pode ser cancelada a qualquer momento. Você terá acesso imediato à área de membros, grupo no WhatsApp e todos os conteúdos disponíveis.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>E se eu perder um encontro online?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          Todos os encontros online são gravados e ficam disponíveis na área de membros para você assistir quando quiser, quantas vezes precisar.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>Os encontros presenciais são obrigatórios?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          Não! Os encontros presenciais são opcionais. Você pode participar apenas dos encontros online e ter acesso completo a todos os benefícios do clube.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>Posso cancelar a qualquer momento?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          Sim! Você pode cancelar sua assinatura a qualquer momento, sem multas ou taxas. Respeitamos sua jornada e suas escolhas.
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <div class="cta-section">
+      <h3>Pronta para priorizar você?</h3>
+      <p>Junte-se a mais mulheres que já escolheram se cuidar com leveza e apoio real.</p>
+      <a href="https://wa.me/5521972262009?text=Olá!%20Gostaria%20de%20entrar%20no%20Clube%20Mulheres%20Saudáveis" class="btn btn-primary">Entrar no Clube Agora</a> 
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contato">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div>
+          <strong style="color:#111827;">Clube Mulheres Saudáveis</strong><br />
+          Psicóloga Jaqueline Vieira • CRP 05/55290<br>
+          <span id="site-year"></span> • Todos os direitos reservados
+        </div>
+        <nav style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+          <a href="#conteudo">Benefícios</a>
+          <a href="#assinar">Assinar</a>
+          <a href="mailto:psijaquelinevieira@gmail.com">Contato</a>
+          <a href="https://www.instagram.com/psijaquelinevieira/">Instagram</a>
+        </nav>
+      </div>
+    </footer>
+  </main>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/5521972262009?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Clube%20Mulheres%20Saudáveis" target="_blank" class="whatsapp-float" aria-label="Fale conosco no WhatsApp">
+    <svg fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script>
+    document.getElementById('site-year').textContent = new Date().getFullYear();
+    
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
